@@ -1,0 +1,100 @@
+alignment tl
+background no
+border_inner_margin 0
+border_width 0
+default_color black
+default_outline_color black
+double_buffer yes
+draw_borders no
+draw_graph_borders yes
+draw_outline no
+draw_shades no
+gap_x 10 # left-right
+gap_y 10 # up-down
+minimum_size 250 0
+no_buffers yes
+override_utf8_locale yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+own_window_transparent yes
+own_window yes
+pad_percents 2
+short_units yes
+stippled_borders 0
+top_name_width 5
+update_interval 1
+uppercase no
+use_spacer right
+use_xft yes
+xftalpha 1.0 #0.2
+xftfont Vibrocentric Mono:size=7
+
+TEXT
+${goto 12}+----System
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- Kernel ${goto 125}${kernel}
+${goto 15}|${goto 38}+-- Machine${goto 125}${machine}
+${goto 15}|${goto 38}+-- Uptime${goto 125}${uptime}
+#${goto 15}|${goto 38}+-- ${if_running audacious2}Audacious - ${exec audtool2 --current-song | cut -b-32}
+${goto 12}+----Memory
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- Total${goto 125}${memmax}
+${goto 15}|${goto 38}+-- In Use${goto 125}${mem} (${memperc}%)
+${goto 15}|${goto 38}+-- Free${goto 125}${memfree}
+${goto 15}|${goto 38}+-- Up to${goto 125}${memeasyfree} freed easily
+${goto 15}|${goto 38}+-- Swap
+${goto 15}|${goto 60}+-- Total${goto 125}${swapmax}
+${goto 15}|${goto 60}+-- Used${goto 125}${swap} - ${swapperc}%
+${goto 15}|${goto 60}+-- Free${goto 125}${swapfree}
+${goto 12}+----Status
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- CPU${goto 125}${cpu cpu0}% - ${freq_g}GHz
+${goto 15}|${goto 40}|${goto 60}+-- ${cpugraph cpu0 10,175 FF0000 FFB90F}
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- CPU${goto 125}${cpu cpu1}% - ${freq_g}GHz
+${goto 15}|${goto 40}|${goto 60}+-- ${cpugraph cpu1 10,175 FF0000 FFB90F}
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- CPU${goto 125}${cpu cpu2}% - ${freq_g}GHz
+${goto 15}|${goto 40}|${goto 60}+-- ${cpugraph cpu2 10,175 FF0000 FFB90F}
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- CPU${goto 125}${cpu cpu3}% - ${freq_g}GHz
+${goto 15}|${goto 40}|${goto 60}+-- ${cpugraph cpu3 10,175 FF0000 FFB90F}
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- Ram${goto 125}${memperc}%
+${goto 15}|${goto 40}|${goto 60}+-- ${membar 4}
+${goto 15}|${goto 38}+-- LoadAvg${goto 125}${loadavg}
+${goto 15}|${goto 38}+-- Disk${goto 125}${fs_used_perc /}% Used
+${goto 15}|${goto 38}+-- Diskio ${goto 125}${diskio}
+${goto 15}|${goto 60}+-- Read${goto 125}${diskio_read}
+${goto 15}|${goto 60}+-- Write${goto 125}${diskio_write}
+${goto 12}+----Storage
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- /ROOT${goto 125}${fs_used /} / ${fs_size /}
+${goto 15}|${goto 40}|${goto 60}+-- ${fs_bar 6,120 /}
+${goto 15}|${goto 38}+-- /HOME${goto 125}${fs_used /home} / ${fs_size /home}
+${goto 15}|${goto 40}|${goto 60}+-- ${fs_bar 6,120 /home}
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- Total${goto 125}${processes}
+${goto 15}|${goto 38}+-- Running${goto 125}${running_processes}
+${goto 15}|${goto 40}|
+${goto 15}|${goto 38}+-- CPU
+${goto 15}|${goto 40}|${goto 60}+-- ${top name 1}${goto 125}${top cpu 1}${top mem 1}
+${goto 15}|${goto 40}|${goto 60}+-- ${top name 2}${goto 125}${top cpu 2}${top mem 2}
+${goto 15}|${goto 40}|${goto 60}+-- ${top name 3}${goto 125}${top cpu 3}${top mem 3}
+${goto 15}|${goto 38}+-- MEM
+${goto 15}|${goto 60}+-- ${top_mem name 1}${goto 125}${top_mem cpu 1}${top_mem mem 1}
+${goto 15}|${goto 60}+-- ${top_mem name 2}${goto 125}${top_mem cpu 2}${top_mem mem 2}
+${goto 15}|${goto 60}+-- ${top_mem name 3}${goto 125}${top_mem cpu 3}${top_mem mem 3}
+${goto 12}+----Net
+${goto 40}|
+${goto 38}+-- Ip
+${goto 40}|${goto 60}+-- Local ${goto 125}${addr wlp8s0} 
+${goto 38}+-- Up
+${goto 40}|${goto 60}+-- Speed${goto 125}${upspeedf wlp8s0}KBps
+${goto 60}|${goto 40}|${goto 90}+-- ${upspeedgraph wlp8s0 10,100 F57900 FCAF3E}
+${goto 60}|
+${goto 40}|${goto 60}+-- Total${goto 125}${totalup wlp8s0}
+${goto 38}+-- Down
+${goto 60}+-- Speed${goto 125}${downspeedf wlp8s0}KBps
+${goto 60}|${goto 90}+-- ${downspeedgraph wlp8s0 10,100 F57900 FCAF3E}
+${goto 60}|
+${goto 60}+-- Total${goto 125}${totaldown wlp8s0}
