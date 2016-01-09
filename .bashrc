@@ -23,6 +23,7 @@ alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
 alias nvidia-settings='optirun -b none nvidia-settings -c :8'
 # Remove all docker images that are in exited status.
 alias drm='if [[ -n $(docker ps -aq -f status=exited) ]]; then docker rm $(docker ps -aq -f status=exited); fi'
+alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
 ###
 ## OVERALL CONDITIONALS {{{
 _islinux=false
