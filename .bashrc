@@ -1,32 +1,37 @@
 # Archlinux Ultimate Install - .bashrc
 # by helmuthdu
 
-#Virtualenv Wrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Desenvolvimento
-source /usr/bin/virtualenvwrapper.sh
-### My alias
-#alias manage='python $VIRTUAL_ENV/manage.py'
-alias manage='python manage.py'
-alias webpython='python2 -m SimpleHTTPServer 8080'
-alias rmpyc='find . -name __pycache__ -delete -or -iname *.py[co] -delete'
-alias runtests='python -m unittest discover'
-alias sysup='pacman -Syu && yaourt -Syyuua --noconfirm'
-alias turnon='sudo tee /proc/acpi/bbswitch <<<ON'
-alias turnoff='sudo tee /proc/acpi/bbswitch <<<OFF'
-alias placastatus='cat /proc/acpi/bbswitch'
-alias fixvbox='sudo modprobe vboxdrv && sudo modprobe vboxnetflt'
-alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
-alias fixkeyboard='sudo setxkbmap -model abnt2 -layout br -variant abnt2'
-alias clearcache='pacman -Scc --noconfirm && sudo journalctl --vacuum-time=2d && rm -rf ~/.local/share/Trash/files'
-alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
-alias nvidia-settings='optirun -b none nvidia-settings -c :8'
-# Remove all docker images that are in exited status.
-alias drm='if [[ -n $(docker ps -aq -f status=exited) ]]; then docker rm $(docker ps -aq -f status=exited); fi'
-alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
-#Run nodejs with Docker
-alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
-###
+#### MY SETTINGS {{{
+    # If you find some error, remove these lines.
+    #Virtualenv Wrapper
+    export WORKON_HOME=$HOME/.virtualenvs
+    export PROJECT_HOME=$HOME/Desenvolvimento
+    source /usr/bin/virtualenvwrapper.sh
+    # added by travis gem
+    [ -f /home/delete/.travis/travis.sh ] && source /home/delete/.travis/travis.sh
+
+    ## MY ALIAS ##
+    #alias manage='python $VIRTUAL_ENV/manage.py'
+    alias manage='python manage.py'
+    alias webpython='python2 -m SimpleHTTPServer 8080'
+    alias rmpyc='find . -name __pycache__ -delete -or -iname *.py[co] -delete'
+    alias runtests='python -m unittest discover'
+    alias sysup='pacman -Syu && yaourt -Syyuua --noconfirm'
+    alias turnon='sudo tee /proc/acpi/bbswitch <<<ON'
+    alias turnoff='sudo tee /proc/acpi/bbswitch <<<OFF'
+    alias placastatus='cat /proc/acpi/bbswitch'
+    alias fixvbox='sudo modprobe vboxdrv && sudo modprobe vboxnetflt'
+    alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
+    alias fixkeyboard='sudo setxkbmap -model abnt2 -layout br -variant abnt2'
+    alias clearcache='pacman -Scc --noconfirm && sudo journalctl --vacuum-time=2d && rm -rf ~/.local/share/Trash/files'
+    alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
+    #alias nvidia-settings='optirun -b none nvidia-settings -c :8'
+    # Remove all docker images that are in exited status.
+    alias drm='if [[ -n $(docker ps -aq -f status=exited) ]]; then docker rm $(docker ps -aq -f status=exited); fi'
+    alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
+    alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
+#### END MY SETTINGS }}}
+
 ## OVERALL CONDITIONALS {{{
 _islinux=false
 [[ "$(uname -s)" =~ Linux|GNU|GNU/* ]] && _islinux=true
@@ -652,6 +657,3 @@ _isroot=false
     fi
   #}}}
 #}}}
-
-# added by travis gem
-[ -f /home/delete/.travis/travis.sh ] && source /home/delete/.travis/travis.sh
