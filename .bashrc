@@ -2,35 +2,57 @@
 # by helmuthdu
 
 #### MY SETTINGS {{{
+  ## OTHERS #{{{
+    # added by travis gem
+    [ -f /home/delete/.travis/travis.sh ] && source /home/delete/.travis/travis.sh
+  #}}}
+
+  ## EXPORTS #{{{
     # If you find some error, remove these lines.
     #Virtualenv Wrapper
     export WORKON_HOME=$HOME/.virtualenvs
     export PROJECT_HOME=$HOME/Desenvolvimento
     source /usr/bin/virtualenvwrapper.sh
-    # added by travis gem
-    [ -f /home/delete/.travis/travis.sh ] && source /home/delete/.travis/travis.sh
+  #}}}
 
-    ## MY ALIAS ##
-    #alias manage='python $VIRTUAL_ENV/manage.py'
-    alias manage='python manage.py'
-    alias webpython='python2 -m SimpleHTTPServer 8080'
-    alias rmpyc='find . -name __pycache__ -delete -or -iname *.py[co] -delete'
-    alias runtests='python -m unittest discover'
-    alias sysup='pacman -Syu && yaourt -Syyuua --noconfirm'
-    alias turnon='sudo tee /proc/acpi/bbswitch <<<ON'
-    alias turnoff='sudo tee /proc/acpi/bbswitch <<<OFF'
-    alias placastatus='cat /proc/acpi/bbswitch'
-    alias fixvbox='sudo modprobe vboxdrv && sudo modprobe vboxnetflt'
-    alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
-    alias fixkeyboard='sudo setxkbmap -model abnt2 -layout br -variant abnt2'
-    alias clearcache='pacman -Scc --noconfirm && sudo journalctl --vacuum-time=2d && rm -rf ~/.local/share/Trash/files'
-    alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
-    #alias nvidia-settings='optirun -b none nvidia-settings -c :8'
-    # Remove all docker images that are in exited status.
-    alias drm='if [[ -n $(docker ps -aq -f status=exited) ]]; then docker rm $(docker ps -aq -f status=exited); fi'
-    alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
-    alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
+  ## MY ALIAS #{{{
+    ## PYTHON DEV #{{{
+      #alias manage='python $VIRTUAL_ENV/manage.py'
+      alias manage='python manage.py'
+      alias webpython='python2 -m SimpleHTTPServer 8080'
+      alias rmpyc='find . -name __pycache__ -delete -or -iname *.py[co] -delete'
+      alias runtests='python -m unittest discover'
+    #}}}
+    ## FIX THINGS #{{{
+      alias fixvbox='sudo modprobe vboxdrv && sudo modprobe vboxnetflt'
+      alias fixkeyboard='sudo setxkbmap -model abnt2 -layout br -variant abnt2'
+    #}}}
+    ## DO THINGS #{{{
+      alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
+    #}}}
+    ## PACMAN #{{{
+      alias sysup='pacman -Syu && yaourt -Syyuua --noconfirm'
+      alias clearcache='pacman -Scc --noconfirm && sudo journalctl --vacuum-time=2d && rm -rf ~/.local/share/Trash/files'
+    #}}}
+    ## NVIDIA #{{{
+      alias turnon='sudo tee /proc/acpi/bbswitch <<<ON'
+      alias turnoff='sudo tee /proc/acpi/bbswitch <<<OFF'
+      alias placastatus='cat /proc/acpi/bbswitch'
+      alias gcnvidia='primusrun /usr/bin/google-chrome-stable %U'
+      #alias nvidia-settings='optirun -b none nvidia-settings -c :8'
+    #}}}
+    ## DOCKER #{{{
+      # Remove all docker images that are in exited status.
+      alias drm='if [[ -n $(docker ps -aq -f status=exited) ]]; then docker rm $(docker ps -aq -f status=exited); fi'
+      alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
+      # Shortcuts
+      alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
+      alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
+    #}}}
+  #}}}
 #### END MY SETTINGS }}}
+
+#####################################################################
 
 ## OVERALL CONDITIONALS {{{
 _islinux=false
@@ -45,6 +67,9 @@ _isxrunning=false
 _isroot=false
 [[ $UID -eq 0 ]] && _isroot=true
 # }}}
+
+#####################################################################
+
 ## PS1 CONFIG {{{
   [[ -f $HOME/.dircolors ]] && eval $(dircolors -b $HOME/.dircolors)
   if $_isxrunning; then
@@ -83,6 +108,9 @@ _isroot=false
     export TERM='xterm-color'
   fi
 #}}}
+
+#####################################################################
+
 ## BASH OPTIONS {{{
   shopt -s cdspell                 # Correct cd typos
   shopt -s checkwinsize            # Update windows size on command
@@ -97,6 +125,9 @@ _isroot=false
     fi
   #}}}
 #}}}
+
+#####################################################################
+
 ## EXPORTS {{{
   export PATH=/usr/local/bin:$PATH
   #Ruby support
@@ -143,6 +174,9 @@ _isroot=false
     fi
   #}}}
 #}}}
+
+#####################################################################
+
 ## ALIAS {{{
   alias freemem='sudo /sbin/sysctl -w vm.drop_caches=3'
   alias enter_matrix='echo -e "\e[32m"; while :; do for i in {1..16}; do r="$(($RANDOM % 2))"; if [[ $(($RANDOM % 5)) == 1 ]]; then if [[ $(($RANDOM % 4)) == 1 ]]; then v+="\e[1m $r   "; else v+="\e[2m $r   "; fi; else v+="     "; fi; done; echo -e "$v"; v=""; done'
@@ -217,6 +251,9 @@ _isroot=false
     alias lm='la | less'
   #}}}
 #}}}
+
+#####################################################################
+
 ## FUNCTIONS {{{
   # BETTER GIT COMMANDS {{{
     bit() {
