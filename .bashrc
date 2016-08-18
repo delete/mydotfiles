@@ -26,6 +26,7 @@
     ## FIX THINGS #{{{
       alias fixvbox='sudo modprobe vboxdrv && sudo modprobe vboxnetflt'
       alias fixkeyboard='sudo setxkbmap -model abnt2 -layout br -variant abnt2'
+      alias fixsubl3='python /home/$USER/Desenvolvimento/fix-sublime/add-material-to-subl3.py'
     #}}}
     ## DO THINGS #{{{
       alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
