@@ -46,6 +46,7 @@
       # Remove all docker images that are in exited status.
       alias drm='if [[ -n $(docker ps -aq -f status=exited) ]]; then docker rm $(docker ps -aq -f status=exited); fi'
       alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
+      alias dstop='docker stop $(docker ps -a -q)'
       # Shortcuts
       alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
       alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
