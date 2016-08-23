@@ -47,6 +47,8 @@
       alias drm='if [[ -n $(docker ps -aq -f status=exited) ]]; then docker rm $(docker ps -aq -f status=exited); fi'
       alias drmi='docker rmi $(docker images -f "dangling=true" -q)'
       alias dstop='docker stop $(docker ps -a -q)'
+      alias drmv='docker volume ls -qf dangling=true | xargs -r docker volume rm'
+
       # Shortcuts
       alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
       alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
