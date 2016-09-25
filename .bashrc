@@ -19,7 +19,7 @@
     ## PYTHON DEV #{{{
       #alias manage='python $VIRTUAL_ENV/manage.py'
       alias manage='python manage.py'
-      alias webpython='python2 -m SimpleHTTPServer 8080'
+      alias webpython='python2 -m SimpleHTTPServer'
       alias rmpyc='find . -name __pycache__ -delete -or -iname *.py[co] -delete'
       alias runtests='python -m unittest discover'
     #}}}
@@ -30,6 +30,7 @@
     #}}}
     ## DO THINGS #{{{
       alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
+      alias shot='maim -s'
     #}}}
     ## PACMAN #{{{
       alias sysup='pacman -Syu && yaourt -Syyuua --noconfirm'
@@ -52,6 +53,9 @@
       # Shortcuts
       alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
       alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
+      # Add an "alert" alias for long running commands.  Use like so:
+      # sleep 10; alert
+      alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
     #}}}
   #}}}
 #### END MY SETTINGS }}}
@@ -104,9 +108,11 @@ _isroot=false
       export GIT_PS1_SHOWSTASHSTATE=1
       export GIT_PS1_SHOWUNTRACKEDFILES=0
 
-      export PS1="$GY[$Y\u$GY@$P\h$GY:$B\W\$(__git_ps1 \"$GY|$LB%s\")$GY]$W\$(get_prompt_symbol) "
+      #export PS1="$GY[$Y\u$GY@$P\h$GY:$B\W\$(__git_ps1 \"$GY|$LB%s\")$GY]$W\$(get_prompt_symbol) "
+      export PS1="$GY[$B\W\$(__git_ps1 \"$GY|$LB%s\")$GY]$W\$(get_prompt_symbol) "
     else
-      export PS1="$GY[$Y\u$GY@$P\h$GY:$B\W$GY]$W\$(get_prompt_symbol) "
+      #export PS1="$GY[$Y\u$GY@$P\h$GY:$B\W$GY]$W\$(get_prompt_symbol) "
+      export PS1="$GY[$B\W$GY]$W\$(get_prompt_symbol) "
     fi
   else
     export TERM='xterm-color'
