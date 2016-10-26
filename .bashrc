@@ -31,6 +31,8 @@
     ## DO THINGS #{{{
       alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
       alias shot='maim -s'
+      alias startvpn='start openvpn@`hostname`'
+      alias stopvpn='stop openvpn@`hostname`'
     #}}}
     ## PACMAN #{{{
       alias sysup='pacman -Syu && yaourt -Syyuua --noconfirm'
