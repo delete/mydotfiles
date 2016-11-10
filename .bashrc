@@ -33,6 +33,9 @@
       alias shot='maim -s'
       alias startvpn='start openvpn@`hostname`'
       alias stopvpn='stop openvpn@`hostname`'
+      if which youtube-dl &>/dev/null; then
+        alias downmp3='youtube-dl --extract-audio --audio-format mp3'
+      fi
     #}}}
     ## PACMAN #{{{
       alias sysup='pacman -Syu && yaourt -Syyuua --noconfirm'
