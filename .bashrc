@@ -1,6 +1,12 @@
 # Archlinux Ultimate Install - .bashrc
 # by helmuthdu
 
+
+if [[ -f "${HOME}/.bash_profile"  ]]; then
+    # shellcheck source=/dev/null
+    source "${HOME}/.bash_profile"
+fi
+
 #### MY SETTINGS {{{
   ## OTHERS #{{{
     # added by travis gem
@@ -56,7 +62,7 @@
       alias drmv='docker volume ls -qf dangling=true | xargs -r docker volume rm'
 
       # Shortcuts
-      alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
+      # alias node='docker run -it -v nodemodules:/install -v $(pwd):/app delete21/node-app node'
       alias getbook='node /home/delete/Desenvolvimento/grab_packt/server.js'
       # Add an "alert" alias for long running commands.  Use like so:
       # sleep 10; alert
