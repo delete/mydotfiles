@@ -8,9 +8,7 @@
 # small enough for one screen.
 tre() {
     tree -aC -I '.git' --dirsfirst "$@" | less -FRNX
-
 }
-
 
 #Get colors in manual pages
 man() {
