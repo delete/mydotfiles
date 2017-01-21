@@ -1,0 +1,28 @@
+{
+	"always_show_minimap_viewport": false,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/Agila Theme/Agila Monokai Extended.tmTheme",
+	"font_size": 8,
+	"ignored_packages":
+	[
+		"Vintage"
+	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 3,
+	"line_padding_top": 3,
+	"overlay_scroll_bars": "enabled",
+	"show_encoding": true,
+	"theme": "Agila Monokai.sublime-theme",
+	"theme_agila_active_tab_entry_lightblue": true,
+	"theme_agila_camouflage": true,
+	"theme_agila_compact_tab": true,
+	"theme_agila_sidebar_font_small": true,
+	"theme_agila_sidebar_heading_lightblue": true,
+	"theme_agila_sidebar_light_icons": true,
+	"theme_agila_sidebar_mini": true,
+	"theme_agila_sidebar_selected_entry_lightblue": true
+}
