@@ -1,239 +1,285 @@
-"""""""""""""""""""""""""""""""""""""""""""""""
-" => General
-"""""""""""""""""""""""""""""""""""""""""""""""
+set nocompatible               	" be iMproved
+filetype off                   	" required!
+let mapleader=","	       	    " change the leader to be a comma vs slash 
+set laststatus=2   		        " Always show the statusline
+set encoding=utf-8 		        " Necessary to show Unicode glyphs
+set hidden			            " makes vim work like every other multiple-file editor
+set title                     	" show title in console title bar
+set number                    	" Display line numbers
+set numberwidth=1             	" using only 1 column (and 1 space) while possible
+set wildmenu                  	" Menu completion in command mode on <Tab>
+set wildmode=full             	" <Tab> cycles between all matching choices.
+set grepprg=ack         	    " replace the default grep program with ack
+set ruler                   	" show the cursor position all the time
+set backspace=2             	" Allow backspacing over autoindent, EOL, and BOL 
+set nowrap                  	" don't wrap text
+set linebreak               	" don't wrap textin the middle of a word
+set autoindent              	" always set autoindenting on
+set smartindent             	" use smart indent if there is no indent file
+set tabstop=4               	" <tab> inserts 4 spaces 
+set shiftwidth=4            	" but an indent level is 2 spaces wide.
+set softtabstop=4           	" <BS> over an autoindent deletes both spaces.
+set expandtab               	" Use spaces, not tabs, for autoindent/tab key.
+set shiftround              	" rounds indent to a multiple of shiftwidth
+set matchpairs+=<:>         	" show matching <> (html mainly) as well
+set lazyredraw                  " do not redraw while running macros (much faster) (LazyRedraw)
+set textwidth=99                " used by gqq or <VISUAL>gq command to format lines
+set clipboard=unnamedplus       " make vim use the system clipboard by default
 
-set encoding=utf-8  " The encoding displayed.
-set fileencoding=utf-8  " The encoding written to file.
-syntax on " Enable syntax highlight
+set path+=**
 
-" Set to auto read when a file is changed from the outside
-" set autoread
+set pastetoggle=<F10>
 
-set nocompatible              " be iMproved, required
-filetype off                  " required
+""" Mouse settings
+"
+set mouse=a
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugins List
-"""""""""""""""""""""""""""""""""""""""""""""""
+""" Ignore these files when completing
+"
+set wildignore+=*.o,*.obj,.git,*.pyc
+set wildignore+=eggs/**
+set wildignore+=*.egg-info/**
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
+""" Insert completion
+" don't select first item, follow typing in autocomplete
+set completeopt=menuone,longest,preview
+" Keep a small completion window
+set pumheight=6
+
+""" Reading/Writing
+"
+set noautowrite                 " Never write a file unless I request it.
+set noautowriteall              " NEVER.
+set noautoread                  " Don't automatically re-read changed files.
+set modeline                    " Allow vim options to be embedded in files;
+set modelines=5                 " they must be within the first or last 5 lines.
+set ffs=unix,dos,mac            " Try recognizing dos, unix, and mac line endings.
+
+""" Messages, Info, Status
+"
+set vb t_vb=                    " Disable all bells.  I hate ringing/flashing.
+set confirm                     " Y-N-C prompt if closing with unsaved changes.
+set showcmd                     " Show incomplete normal mode commands as I type.
+
+""" Searching and Patterns
+"
+set ignorecase                  " Default to using case insensitive searches,
+set smartcase                   " unless uppercase letters are used in the regex.
+set smarttab                    " Handle tabs more intelligently 
+set hlsearch                    " Highlight searches by default.
+set incsearch                   " Incrementally search while typing a /regex
+
+
+""" Misc
+"
+set nobackup
+set noswapfile
+set foldlevel=99
+
+
+
+""" VUNDLE
+"
+set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 
-" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
-" The NERD tree
-Plugin 'scrooloose/nerdtree'
-
-" ctrlp.vim
-Plugin 'kien/ctrlp.vim'
-
-" colorschemes
-Plugin 'chriskempson/base16-vim'
-
-" MOAR COLORSCHEMES
-Plugin 'flazz/vim-colorschemes'
-
-" fugitive
+" My Bundles here:
+"
+Plugin 'posva/vim-vue'
 Plugin 'tpope/vim-fugitive'
-
-" vim-airline
 Plugin 'bling/vim-airline'
-
-" vim-airline-themes
-Plugin 'vim-airline/vim-airline-themes'
-
- " syntastic
-Plugin 'scrooloose/syntastic'
-
-" identLine
-Plugin 'Yggdroot/indentLine'
-
-" syntax highlight for JS (ES6)
-Plugin 'othree/yajs.vim'
-
-" JS Syntax/Indent related Plugin (required for JSX highlight)
+Plugin 'vim-scripts/surround.vim'
+Plugin 'vim-scripts/nginx.vim'
+Plugin 'vim-scripts/apachelogs.vim'
+Plugin 'nvie/vim-flake8'
+Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript'
-
-" .editorconfig
-Plugin 'editorconfig/editorconfig-vim'
-
-" emmet
-Plugin 'mattn/emmet-vim'
-
-" automatic insertion of matching pairs (for `(`, `[`, etc...)
-Plugin 'jiangmiao/auto-pairs'
-
-" surround
-Plugin 'tpope/vim-surround'
-
-" coffeescript highlight
+Plugin 'scrooloose/syntastic'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Plugin 'vim-scripts/tComment'
+Plugin 'kien/ctrlp.vim'
+Plugin 'docunext/closetag.vim'
+Plugin 'Rykka/clickable.vim'
+Plugin 'Rykka/clickable-things'
+Plugin 'Rykka/os.vim'
+Plugin 'Rykka/riv.vim'
+Plugin 'spf13/vim-colors'
+Plugin 'scrooloose/nerdtree'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'Shougo/neocomplcache.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
 Plugin 'kchmck/vim-coffee-script'
+Plugin 'groenewege/vim-less'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'tmhedberg/matchit'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'othree/html5.vim'
+Plugin 'rodjek/vim-puppet'
+Plugin 'mileszs/ack.vim'
+Plugin 'ekalinin/Dockerfile.vim'
+Plugin 'lepture/vim-jinja'
+Plugin 'Valloric/MatchTagAlways'
 
-" C general
-Plugin 'c.vim'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-" filetype plugin on
-" Put your non-Plugin stuff after this line
-
-
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""
-" => Plugin Related Configs
-"""""""""""""""""""""""""""""""""""""""""""""""
-
-" Open NERDTree automatically when vim starts up
-" autocmd vimenter * NERDTree
-" NERDTree
-let NERDTreeShowHidden=1
-map <silent> <C-n> :NERDTreeToggle<CR>
-
-" close NERDTree after a file is opened
-let g:NERDTreeQuitOnOpen=1
-
-" vim-airline
-let g:airline_powerline_fonts=1
-let g:airline_theme='bubblegum'
-let g:airline#extensions#tabline#enabled=1
-set guifont=Meslo\ LG\ S\ Regular\ for\ Powerline:h20
-
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-let g:syntastic_javascript_checkers = ['jshint']
-let g:syntastic_json_checkers = ['jsonlint']
-
-" enable emmet for JSX
-let g:user_emmet_jsx = 1
-
-" ctrlp
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard'] " only show files that are not ignored by git
-
-" enable syntax highlight for JSX on .js files
-let g:jsx_ext_required = 0
-
-" identLine
-let g:indentLine_enabled = 1
-let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_color_term = 239
-let g:indentLine_char = '¦'
-let g:indentLine_leadingSpaceChar = '⋅'
+call vundle#end()
+filetype plugin indent on     " required!
+" ...
 
 
+filetype on
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-" => Filetype Related Configs
-"""""""""""""""""""""""""""""""""""""""""""""""
-
-" vim thinks that json is javascript
-au BufRead,BufNewFile *.json set filetype=json
-
-" display handlebars templates as html
-au BufNewFile,BufRead *.handlebars set filetype=html
+""" Vim-Easy-Align
+"
+" Start interactive EasyAlign in visual mode
+vmap <Enter> <Plug>(EasyAlign)
+" Start interactive EasyAlign with a Vim movement
+nmap <Leader>a <Plug>(EasyAlign)
 
 
+""" javascript-libraries-syntax
+"
+let g:used_javascript_libs = 'jquery,angularjs,requirejs'
+autocmd BufReadPre *.js let b:javascript_lib_use_jquery = 1
+autocmd BufReadPre *.js let b:javascript_lib_use_angularjs = 1
+autocmd BufReadPre *.js let b:javascript_lib_use_requirejs = 1
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-" => Visual Related Configs
-"""""""""""""""""""""""""""""""""""""""""""""""
+""" Flake8
+"
+let g:flake8_max_line_length=99
+let g:flake8_max_complexity=10
 
-" molokai
-colorscheme bubblegum
-let g:molokai_original = 1
-let g:rehash256 = 1
 
-" maintain terminal background
-hi Normal ctermbg=none
+""" jedi-vim
+"
+autocmd FileType python setlocal completeopt-=preview
+let g:jedi#popup_on_dot = 0
 
-" background and theme
-set background=dark
 
-" long lines as just one line (have to scroll horizontally)
-set nowrap
+""" syntastic
+"
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_jump=0
+let g:syntastic_stl_format = '[%E{Err: %fe #%e}%B{, }%W{Warn: %fw #%w}]'
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': ['python', 'php'],
+                           \ 'passive_filetypes': ['puppet'] }
+let g:syntastic_python_checkers=['flake8']
+let g:syntastic_python_flake8_post_args='--ignore=E501,E128,E225'
 
-" 256 colors
+
+""" Vim-AirLine
+"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
+
+""" NERDTree
+"
+let NERDTreeIgnore = ['\.pyc$']
+
+
+""" CTRLP
+"
+let g:ctrlp_prompt_mappings = {
+    \ 'AcceptSelection("e")': ['<c-t>'],
+    \ 'AcceptSelection("t")': ['<cr>', '<2-LeftMouse>'],
+    \ }
+let g:ctrlp_working_path_mode = '0'
+
+""" NeoComplCache
+"
+let g:neocomplcache_enable_at_startup = 1
+
+
+""" Colors
+"
+silent!colorscheme molokai
+set colorcolumn=99
 set t_Co=256
-
-" line numbers
-set number
-
-" show the status line all the time
-set laststatus=2
-
-" toggle invisible characters
-set invlist
-set list
-set listchars=tab:¦\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
-highlight SpecialKey ctermbg=none guifg=darkgray" make the highlighting of tabs less annoying
-hi NonText ctermfg=7 guifg=darkgray
+syntax on
+set cursorline
+hi ColorColumn ctermbg=red guibg=red
+hi TabLineFill ctermfg=LightGray ctermbg=Black
+hi TabLine ctermfg=Gray ctermbg=Black
+hi TabLineSel ctermfg=White ctermbg=Red
+hi CursorLine term=bold cterm=bold guibg=Grey40
+hi visual ctermfg=black ctermbg=lightblue
 
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""
-" => Keymappings
-"""""""""""""""""""""""""""""""""""""""""""""""
-
-" dont use arrowkeys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-" really, just dont
-inoremap <Up>    <NOP>
-inoremap <Down>  <NOP>
-inoremap <Left>  <NOP>
-inoremap <Right> <NOP>
-
-" copy and paste to/from vIM and the clipboard
-nnoremap <C-y> +y
-vnoremap <C-y> +y
-nnoremap <C-p> +P
-vnoremap <C-p> +P
-
-" access system clipboard
-set clipboard=unnamed
-
-" toggle paste mode with F2
-set pastetoggle=<F2>
-
-" swapfiles location
-set backupdir=/tmp//
-set directory=/tmp//
-
-" make backspace work like most other apps
-set backspace=2 
-
-" stop comments auto indentation
-autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+""" Disable Match Paren
+"
+let loaded_matchparen = 1
 
 
+""" Key Mappings
+"
 
-"""""""""""""""""""""""""""""""""""""""""""""""
-" => Indentation
-"""""""""""""""""""""""""""""""""""""""""""""""
+" F2 toogles TabBar
+nmap <F2> :NERDTreeTabsToggle<CR>
+" LF finds the current file in the tree
+nmap LF :NERDTreeFind<CR>
 
-" Use spaces instead of tabs
-set expandtab
+" F3 toogles TabBar
+nmap <F3> :TagbarToggle<CR>
 
-" Be smart when using tabs ;)
-set smarttab
+" F4 Find word in all files
+nmap <F4> :execute "vimgrep /" . expand("<cword>") . "/gj **/*.py" <Bar> cw<CR>
 
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
+" jj to ESC while in insert mode 
+imap jj <Esc> 
+" ; to : while in normal mode 
+nnoremap ; :
 
-set ai "Auto indent
-set si "Smart indent
+" Tab navigation
+noremap <C-Right> :tabn<CR>
+inoremap <C-Right> <esc>:tabn<CR><Insert>
+noremap <C-Left> :tabprev<CR>
+inoremap <C-Left> <ESC>tabprev<CR><Insert>
+
+" Window navigation
+noremap <C-h> :wincmd h<CR>
+noremap <C-j> :wincmd j<CR>
+noremap <C-k> :wincmd k<CR>
+noremap <C-l> :wincmd l<CR>
+
+
+" Indent/unindent highlighted block (and maintain highlight)
+"
+vnoremap <Tab>    >gv
+vnoremap <S-Tab>  <gv
+
+
+" Map Ctrl+P to duplicate visual selection 
+"
+vmap <C-p> y'>p
+
+
+""" Highlight excess line length
+"
+augroup vimrc_autocmds
+    autocmd!
+    " highlight characters past column 99
+    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python match Excess /\%99v.*/
+    autocmd FileType python set nowrap
+augroup END
+
+
+""" Silver Searcher
+" https://github.com/ggreer/the_silver_searcher
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+
+""" vim air-line
+"
+" let g:airline_powerline_fonts = 1
+
+""" Include ~/.vimrc_extra, if file exists
+"
+let vimrc_extra=expand("~/.vimrc_extra")
+if filereadable(vimrc_extra)
+    exec ":source " . vimrc_extra
+endif
