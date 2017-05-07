@@ -26,6 +26,10 @@ font pango:monospace 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# FLoaint into all workspaces
+bindsym $mod+s sticky toggle
+
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -40,8 +44,9 @@ bindsym $mod+Shift+q kill
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
+bindsym $mod+d exec rofi -show run -lines 3
 
 # spotify: no border
 #for_window [class="^Spotify$"] border none
@@ -73,7 +78,7 @@ for_window [class="Wine"] floating enable
 for_window [class="Wireshark"] floating enable
 
 # lock screen
-bindsym $mod+l exec i3lock -c 111111
+bindsym $mod+l exec i3lock -i "/home/delete/.i3lock/background.png" 
 
 # change focus
 #bindsym $mod+j focus left
@@ -109,7 +114,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -125,29 +130,49 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+
+# Workspaces variables
+
+set $workspace1 "1 "
+set $workspace2 "2 "
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
+set $workspace6 "6 "
+set $workspace7 "7 "
+set $workspace8 "8 "
+set $workspace8 "9 "
+set $workspace10 "10 "
+
+
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
+bindsym $mod+1 workspace $workspace1
+bindsym $mod+2 workspace $workspace2
+bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
 bindsym $mod+6 workspace 6
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+0 workspace $workspace10 
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+2 move container to workspace $workspace2 
+bindsym $mod+Shift+3 move container to workspace $workspace3 
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
 bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+0 move container to workspace $workspace10 
+
+
+# Open program on workspace
+
+assign [class="Spotify"] $workspace10
 
 
 # audio controls
@@ -160,6 +185,9 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute s
 #bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5+
 #bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5-
 
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /home/delete/.touchpad.sh # toggle touchpad
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -213,14 +241,44 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+
+# Colors
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
+# window colors
+#                       border              background         text                 indicator
+client.focused          $bg-color           $bg-color          $text-color          #00ff00
+client.unfocused        $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.focused_inactive $inactive-bg-color $inactive-bg-color $inactive-text-color #00ff00
+client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          #00ff00
+
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3status
+	colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
 }
 
-exec --no-startup-id volumeicon
 
-# run the merge for good colors
-#exec xrdb -merge $HOME/.Xresources
-#exec xrdb -merge $HOME/.Xdefaults
+
+
+exec xrdb -merge $HOME/.Xresources
+
+# Run at start
+
+exec --no-startup-id volumeicon
+exec --no-startup-id blueman-applet
+# Transparent background
+exec nitrogen --restore
+exec --no-startup-id compton -f
