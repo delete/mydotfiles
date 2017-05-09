@@ -172,22 +172,21 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 
 # Open program on workspace
 
-assign [class="Spotify"] $workspace10
+assign [class="Terminator"] $workspace2
+assign [class="Google-chrome"] $workspace1
 
+assign [class="Spotify"] $workspace10
+for_window [class="Spotify"] move to workspace $workspace10
 
 # audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 1 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 1 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 #bindsym XF86AudioMicMute exec amixer set Capture toggle # mute mic
 
 #bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 #bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5+
 #bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5-
-
-
-# Touchpad controls
-bindsym XF86TouchpadToggle exec /home/delete/.touchpad.sh # toggle touchpad
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
@@ -276,9 +275,11 @@ bar {
 exec xrdb -merge $HOME/.Xresources
 
 # Run at start
-
+exec --no-startup-id devmon --no-gui
+exec --no-startup-id pulseaudio --start
 exec --no-startup-id volumeicon
 exec --no-startup-id blueman-applet
+exec --no-startup-id nm-applet
 # Transparent background
 exec nitrogen --restore
 exec --no-startup-id compton -f
