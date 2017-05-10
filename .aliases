@@ -16,6 +16,7 @@
 #}}}
 
 ## DO THINGS #{{{
+  alias modfiles='find . -type f -print0 | xargs -0 chmod 0' #644
   alias formatpen='sudo mkfs.vfat -n "PENDRIVE" -I'
   alias shot='maim -s'
   alias startvpn='start openvpn@`hostname`'
