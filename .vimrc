@@ -1,34 +1,30 @@
-set nocompatible               	" be iMproved
-filetype off                   	" required!
-let mapleader=","	       	    " change the leader to be a comma vs slash 
-set laststatus=2   		        " Always show the statusline
-set encoding=utf-8 		        " Necessary to show Unicode glyphs
-set hidden			            " makes vim work like every other multiple-file editor
-set title                     	" show title in console title bar
-set number                    	" Display line numbers
-set numberwidth=1             	" using only 1 column (and 1 space) while possible
-set wildmenu                  	" Menu completion in command mode on <Tab>
-set wildmode=full             	" <Tab> cycles between all matching choices.
-set grepprg=ack         	    " replace the default grep program with ack
-set ruler                   	" show the cursor position all the time
-set backspace=2             	" Allow backspacing over autoindent, EOL, and BOL 
-set nowrap                  	" don't wrap text
-set linebreak               	" don't wrap textin the middle of a word
-set autoindent              	" always set autoindenting on
-set smartindent             	" use smart indent if there is no indent file
-set tabstop=4               	" <tab> inserts 4 spaces 
-set shiftwidth=4            	" but an indent level is 2 spaces wide.
-set softtabstop=4           	" <BS> over an autoindent deletes both spaces.
-set expandtab               	" Use spaces, not tabs, for autoindent/tab key.
-set shiftround              	" rounds indent to a multiple of shiftwidth
-set matchpairs+=<:>         	" show matching <> (html mainly) as well
+set nocompatible                " be iMproved
+filetype off                    " required!
+let mapleader=","               " change the leader to be a comma vs slash 
+set laststatus=2                " Always show the statusline
+set encoding=utf-8              " Necessary to show Unicode glyphs
+set hidden                      " makes vim work like every other multiple-file editor
+set title                       " show title in console title bar
+set number                      " Display line numbers
+set numberwidth=1               " using only 1 column (and 1 space) while possible
+set wildmenu                    " Menu completion in command mode on <Tab>
+set wildmode=full               " <Tab> cycles between all matching choices.
+set grepprg=ack                 " replace the default grep program with ack
+set ruler                       " show the cursor position all the time
+set backspace=2                 " Allow backspacing over autoindent, EOL, and BOL 
+set nowrap                      " don't wrap text
+set linebreak                   " don't wrap textin the middle of a word
+set autoindent                  " always set autoindenting on
+set smartindent                 " use smart indent if there is no indent file
+set tabstop=4                   " <tab> inserts 4 spaces 
+set shiftwidth=4                " but an indent level is 2 spaces wide.
+set softtabstop=4               " <BS> over an autoindent deletes both spaces.
+set expandtab                   " Use spaces, not tabs, for autoindent/tab key.
+set shiftround                  " rounds indent to a multiple of shiftwidth
+set matchpairs+=<:>             " show matching <> (html mainly) as well
 set lazyredraw                  " do not redraw while running macros (much faster) (LazyRedraw)
 set textwidth=99                " used by gqq or <VISUAL>gq command to format lines
 set clipboard=unnamedplus       " make vim use the system clipboard by default
-
-set path+=**
-
-set pastetoggle=<F10>
 
 """ Mouse settings
 "
@@ -91,8 +87,6 @@ Plugin 'posva/vim-vue'
 Plugin 'tpope/vim-fugitive'
 Plugin 'bling/vim-airline'
 Plugin 'vim-scripts/surround.vim'
-Plugin 'vim-scripts/nginx.vim'
-Plugin 'vim-scripts/apachelogs.vim'
 Plugin 'nvie/vim-flake8'
 Plugin 'majutsushi/tagbar'
 Plugin 'pangloss/vim-javascript'
@@ -109,19 +103,16 @@ Plugin 'spf13/vim-colors'
 Plugin 'scrooloose/nerdtree'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'Lokaltog/vim-easymotion'
-Plugin 'Shougo/neocomplcache.vim'
+Plugin 'Shougo/neocomplete.vim'
 Plugin 'othree/javascript-libraries-syntax.vim'
-Plugin 'kchmck/vim-coffee-script'
 Plugin 'groenewege/vim-less'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'tmhedberg/matchit'
-Plugin 'junegunn/vim-easy-align'
 Plugin 'othree/html5.vim'
-Plugin 'rodjek/vim-puppet'
 Plugin 'mileszs/ack.vim'
 Plugin 'ekalinin/Dockerfile.vim'
 Plugin 'lepture/vim-jinja'
 Plugin 'Valloric/MatchTagAlways'
+Plugin 'dracula/vim'
 
 call vundle#end()
 filetype plugin indent on     " required!
@@ -129,14 +120,6 @@ filetype plugin indent on     " required!
 
 
 filetype on
-
-""" Vim-Easy-Align
-"
-" Start interactive EasyAlign in visual mode
-vmap <Enter> <Plug>(EasyAlign)
-" Start interactive EasyAlign with a Vim movement
-nmap <Leader>a <Plug>(EasyAlign)
-
 
 """ javascript-libraries-syntax
 "
@@ -189,24 +172,28 @@ let g:ctrlp_prompt_mappings = {
     \ }
 let g:ctrlp_working_path_mode = '0'
 
-""" NeoComplCache
+
+""" NeoComplete
 "
-let g:neocomplcache_enable_at_startup = 1
+let g:neocomplete#enable_at_startup = 1
 
 
 """ Colors
 "
-silent!colorscheme molokai
-set colorcolumn=99
-set t_Co=256
-syntax on
-set cursorline
-hi ColorColumn ctermbg=red guibg=red
 hi TabLineFill ctermfg=LightGray ctermbg=Black
 hi TabLine ctermfg=Gray ctermbg=Black
 hi TabLineSel ctermfg=White ctermbg=Red
-hi CursorLine term=bold cterm=bold guibg=Grey40
 hi visual ctermfg=black ctermbg=lightblue
+
+" Enable line and cursor highlight
+set cursorline
+set cursorcolumn
+hi CursorLine term=bold cterm=bold ctermbg=grey guibg=grey
+hi ColorColumn term=bold cterm=bold ctermbg=grey guibg=grey
+
+" Dracula theme
+syntax on
+color dracula
 
 
 """ Disable Match Paren
@@ -216,6 +203,9 @@ let loaded_matchparen = 1
 
 """ Key Mappings
 "
+
+" F10 tppgles paste mode
+set pastetoggle=<F10>
 
 " F2 toogles TabBar
 nmap <F2> :NERDTreeTabsToggle<CR>
