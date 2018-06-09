@@ -1,0 +1,30 @@
+{
+    "window.zoomLevel": -2,
+    "window.menuBarVisibility": "toggle",
+    "editor.tabSize": 2,
+    "editor.fontFamily": "Fira Code",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "editor.multiCursorModifier": "ctrlCmd",
+    "editor.snippetSuggestions": "top",
+    "editor.formatOnPaste": true,
+    "editor.minimap.enabled": false,
+    "explorer.confirmDelete": false,
+
+    "bracketPairColorizer.forceIterationColorCycle": true,
+
+    "workbench.iconTheme": "vscode-icons",
+    "workbench.colorTheme": "Night Owl",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#000C1D",
+        "sideBar.background": "#000C1D",
+        "sideBar.border": "#102a44",
+        "sideBar.foreground": "#8BADC1",
+        "editor.background": "#000C1D",
+        "editorGutter.background": "#000C1D",
+        "editorGroupHeader.tabsBackground": "#000C1D",
+        "statusBar.background": "#000C1D",
+        "panel.background": "#000C1D",
+        "panelTitle.activeForeground": "#fff"
+    },
+}
