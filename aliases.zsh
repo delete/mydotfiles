@@ -27,5 +27,8 @@ alias df='df -h'
 alias mkdir='mkdir -p -v'
 alias ll='ls -alh'
 
-#Projects
+# Projects
 alias cdef="cd ~/Projects/easyflow"
+
+# SSH
+alias loginssh="ssh-add ~/.ssh/id_rsa &>/dev/null"
