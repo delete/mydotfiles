@@ -1,30 +1,30 @@
 {
-    "window.zoomLevel": -2,
-    "window.menuBarVisibility": "toggle",
-    "editor.tabSize": 2,
-    "editor.fontFamily": "Fira Code",
-    "editor.fontLigatures": true,
-    "editor.fontSize": 13,
-    "editor.multiCursorModifier": "ctrlCmd",
-    "editor.snippetSuggestions": "top",
-    "editor.formatOnPaste": true,
-    "editor.minimap.enabled": false,
-    "explorer.confirmDelete": false,
-
-    "bracketPairColorizer.forceIterationColorCycle": true,
-
-    "workbench.iconTheme": "vscode-icons",
-    "workbench.colorTheme": "Night Owl",
-    "workbench.colorCustomizations": {
-        "activityBar.background": "#000C1D",
-        "sideBar.background": "#000C1D",
-        "sideBar.border": "#102a44",
-        "sideBar.foreground": "#8BADC1",
-        "editor.background": "#000C1D",
-        "editorGutter.background": "#000C1D",
-        "editorGroupHeader.tabsBackground": "#000C1D",
-        "statusBar.background": "#000C1D",
-        "panel.background": "#000C1D",
-        "panelTitle.activeForeground": "#fff"
-    },
+  "workbench.colorTheme": "Dracula",
+  "workbench.iconTheme": "vscode-icons",
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/*/**": true
+  },
+  "prettier.singleQuote": true,
+  "prettier.jsxSingleQuote": true,
+  "editor.tabSize": 2,
+  "explorer.confirmDragAndDrop": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "explorer.confirmDelete": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.minimap.enabled": false,
+  "diffEditor.renderSideBySide": false,
+  "editor.formatOnSave": true,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.includeLanguages": { "typescriptreact": "html", "plaintext": "javascript" },
+  "css.validate": false,
+  "editor.quickSuggestions": {
+    "strings": true
+  },
 }
