@@ -1,132 +1,150 @@
-call plug#begin('~/.config/nvim/plugged')
+" Fundamentals "{{{
+" ---------------------------------------------------------------------
 
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'prettier/vim-prettier'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-gitgutter'
+" init autocmd
+autocmd!
+" set script encoding
+scriptencoding utf-8
+" stop loading config if it's on tiny or small
+if !1 | finish | endif
 
-call plug#end()
-
+set nocompatible
 set number
-set hidden
-set nobackup
-set nowritebackup
-set termguicolors
-set updatetime=300
-set shortmess+=c
-set signcolumn=yes
+syntax enable
+set fileencodings=utf-8,sjis,euc-jp,latin
 set encoding=utf-8
-set t_Co=256
-set noerrorbells
-set tabstop=2
-set shiftwidth=2
+set title
+set autoindent
+set background=dark
+set nobackup
+set hlsearch
+set showcmd
+set cmdheight=1
+set laststatus=2
+set scrolloff=10
 set expandtab
-set nowrap
-set cmdheight=2
+"let loaded_matchparen = 1
+set shell=zsh
+set backupskip=/tmp/*,/private/tmp/*
+set mouse=a
+set relativenumber
+
+" incremental substitution (neovim)
+if has('nvim')
+  set inccommand=split
+endif
+
+" Suppress appending <PasteStart> and <PasteEnd> when pasting
+set t_BE=
+
+set nosc noru nosm
+" Don't redraw while executing macros (good performance config)
+set lazyredraw
+"set showmatch
+" How many tenths of a second to blink when matching brackets
+"set mat=2
+" Ignore case when searching
+set ignorecase
+" Be smart when using tabs ;)
+set smarttab
+" indents
+filetype plugin indent on
+set shiftwidth=2
+set tabstop=2
+set ai "Auto indent
+set si "Smart indent
+set nowrap "No Wrap lines
+set backspace=start,eol,indent
+" Finding files - Search down into subfolders
+set path+=**
+set wildignore+=*/node_modules/*
+
+" Turn off paste mode when leaving insert
+autocmd InsertLeave * set nopaste
+
+" Add asterisks in block comments
+set formatoptions+=r
+
+"}}}
+
+" Highlights "{{{
+" ---------------------------------------------------------------------
+set cursorline
 set cursorcolumn
-set clipboard+=unnamedplus
-"set mouse=a
 
-" Theme
-set termguicolors	" enable true colors support
-syntax on
-colorscheme dracula
+" Set cursor line color on visual mode
+highlight Visual cterm=NONE ctermbg=236 ctermfg=NONE guibg=Grey40
 
+highlight LineNr cterm=none ctermfg=240 guifg=#2b506e guibg=#000000
 
-" Plugin: prettier/vim-prettier
-let g:prettier#config#bracket_spacing = 'true'
-let g:prettier#config#jsx_bracket_same_line = 'false'
-let g:prettier#autoformat = 0
-autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
-" set filetypes as typescript.tsx
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescript.tsx
+augroup BgHighlight
+  autocmd!
+  autocmd WinEnter * set cul
+  autocmd WinLeave * set nocul
+augroup END
 
+if &term =~ "screen"
+  autocmd BufEnter * if bufname("") !~ "^?[A-Za-z0-9?]*://" | silent! exe '!echo -n "\ek[`hostname`:`basename $PWD`/`basename %`]\e\\"' | endif
+  autocmd VimLeave * silent!  exe '!echo -n "\ek[`hostname`:`basename $PWD`]\e\\"'
+endif
 
-" Key mapping
-"
-nmap <C-p> :GFiles<CR>
-nmap <C-s-f> :Rg<CR>
-nmap <C-b> :Vexplore<CR>
-nmap <S-b> :Hexplore<CR>
+"}}}
 
-" move line up and down
-nnoremap <S-Up> :m-2<CR>
-nnoremap <S-Down> :m+<CR>
-inoremap <S-Up> <Esc>:m-2<CR>
-inoremap <S-Down> <Esc>:m+<CR>
+" File types "{{{
+" ---------------------------------------------------------------------
+" JavaScript
+au BufNewFile,BufRead *.es6 setf javascript
+" TypeScript
+au BufNewFile,BufRead *.tsx setf typescriptreact
+" Markdown
+au BufNewFile,BufRead *.md set filetype=markdown
 
-" Let definitions
-let mapleader = ","
+set suffixesadd=.js,.es,.jsx,.json,.css,.less,.sass,.py,.md
 
-" Disable arrows
-noremap <Up> <Nop>
-noremap <Down> <Nop>
-noremap <Left> <Nop>
-noremap <Right> <Nop>
+autocmd FileType yaml setlocal shiftwidth=2 tabstop=2
 
-vmap < <gv
-vmap > >gv
+"}}}
 
-"" Clean search (highlight)
-nnoremap <silent> <leader><space> :noh<cr>i
-
-" F10 tppgles paste mode
-set pastetoggle=<F10>
-
-
-" Plugin: Coc
-
-" Use tab for trigger completion with characters ahead and navigate.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
+" Imports "{{{
+" ---------------------------------------------------------------------
+runtime ./plug.vim
+if has("unix")
+  let s:uname = system("uname -s")
+  " Do Mac stuff
+  if s:uname == "Darwin\n"
+    runtime ./macos.vim
   endif
-endfunction
+endif
 
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-" Remap keys for applying codeAction to the current line.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
+runtime ./maps.vim
+"}}}
 
+" Syntax theme "{{{
+" ---------------------------------------------------------------------
 
-" Plugin: GitGutter
-let g:gitgutter_map_keys = 0
-let g:gitgutter_sign_added = '▎'
-let g:gitgutter_sign_modified = '▎'
-let g:gitgutter_sign_removed = '▎'
-let g:gitgutter_sign_removed_first_line = '▔'
-let g:gitgutter_sign_modified_removed = '▋'
-autocmd BufWritePost * GitGutter
+" true color
+if exists("&termguicolors") && exists("&winblend")
+  syntax enable
+  set termguicolors
+  set winblend=0
+  set wildoptions=pum
+  set pumblend=5
+  set background=dark
+  " Use dracula
+endif
+
+colorscheme dracula
+"}}}
+
+" Extras "{{{
+" ---------------------------------------------------------------------
+set exrc
+"}}}
+
+" Paths "{{{
+" ---------------------------------------------------------------------
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/Users/fellipepinheiro/.config/nvim/envs/neovim3/bin/python3'
+"}}}
+
+" vim: set foldmethod=marker foldlevel=0:
