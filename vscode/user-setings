@@ -2,29 +2,90 @@
   "workbench.colorTheme": "Dracula",
   "workbench.iconTheme": "vscode-icons",
   "files.watcherExclude": {
+    "**/.DS_Store": true,
+    "**/.hg": true,
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/*/**": true
   },
-  "prettier.singleQuote": true,
-  "prettier.jsxSingleQuote": true,
-  "editor.tabSize": 2,
   "explorer.confirmDragAndDrop": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "explorer.confirmDelete": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
+  "diffEditor.renderSideBySide": false,
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    // "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.includeLanguages": {
+    "typescriptreact": "html",
+    "plaintext": "javascript"
+  },
+  "css.validate": false,
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "editor.minimap.enabled": false,
-  "diffEditor.renderSideBySide": false,
+  // Editor
+  "editor.linkedEditing": true,
   "editor.formatOnSave": true,
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "tailwindCSS.includeLanguages": { "typescriptreact": "html", "plaintext": "javascript" },
-  "css.validate": false,
+  "editor.tabSize": 2,
+  "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
     "strings": true
   },
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.fixAll.tslint": true,
+    "source.fixAll.stylelint": true
+    // "source.organizeImports": true
+  },
+  "launch": {
+    "configurations": [],
+    "compounds": []
+  },
+  // Eslint
+  "eslint.packageManager": "yarn",
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "eslint.format.enable": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "editor.inlineSuggest.enabled": true,
+  "github.copilot.enable": {
+    "*": false,
+    "yaml": false,
+    "plaintext": false,
+    "markdown": false,
+    "typescriptreact": true,
+    "typescript": true
+  },
+  // Spaceduck
+  "editor.fontSize": 14,
+  // "editor.lineHeight": 25,
+  "editor.letterSpacing": 0.5,
+  "files.trimTrailingWhitespace": true,
+  "workbench.editor.showTabs": true,
+  "git.path": "/usr/local/bin/git",
+  "window.titleBarStyle": "native",
+  "errorLens.lintFilePaths": {
+    "eslint": ["**/*.eslintrc.{js,cjs,yaml,yml,json}", "**/*package.json"],
+    "Stylelint": [
+      "**/*.stylelintrc",
+      "**/*.stylelintrc.{cjs,js,json,yaml,yml}",
+      "**/*stylelint.config.{cjs,js}",
+      "**/*package.json"
+    ]
+  },
+  "dart.flutterSdkPath": "/Users/fellipepinheiro/flutter"
 }
